@@ -1,1 +1,56 @@
-{}
+{
+    "name": "Controls",
+    "maps": [
+        {
+            "name": "Controls",
+            "id": "51f89d1e-d3f0-431a-a935-4d7b09fea916",
+            "actions": [
+                {
+                    "name": "Up/Down",
+                    "type": "Value",
+                    "id": "56d4806a-c727-432d-8a6c-9a65bf3d4379",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "1412b765-3566-481a-9b92-57905fc40b1f",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up/Down",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "0df61828-d07f-4629-8e4e-9e701ec10660",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up/Down",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "ef393d6e-52ba-4850-800d-dc4180686c5c",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up/Down",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

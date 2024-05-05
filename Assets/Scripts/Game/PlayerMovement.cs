@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public KeyCode up;
-    public KeyCode down;
+    public float x_Movement;
+    public float y_Movement;
     private Rigidbody2D myRB;
     [SerializeField]
     private float speed;
@@ -15,29 +16,15 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (up == KeyCode.None) up = KeyCode.UpArrow;
-        if (down == KeyCode.None) down = KeyCode.DownArrow;
         myRB = GetComponent<Rigidbody2D>();
         SetMinMax();
     }
-
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetKey(up) && transform.position.y < limitSuperior)
-        {
-            myRB.velocity = new Vector2(0f, speed);
-        }
-        else if (Input.GetKey(down) && transform.position.y > limitInferior)
-        {
-            myRB.velocity = new Vector2(0f, -speed);
-        }
-        else
-        {
-            myRB.velocity = Vector2.zero;
-        }
-    }
+        float newYPosition = Mathf.Clamp(myRB.position.y + y_Movement * speed * Time.fixedDeltaTime, limitInferior, limitSuperior);
+        myRB.MovePosition(new Vector2(myRB.position.x + x_Movement * speed * Time.fixedDeltaTime, newYPosition));
 
+    }
     void SetMinMax()
     {
         Vector3 bounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
@@ -51,5 +38,10 @@ public class PlayerMovement : MonoBehaviour
         {
             CandyGenerator.instance.ManageCandy(other.gameObject.GetComponent<CandyController>(), this);
         }
+    }
+    public void OnMovement(InputAction.CallbackContext context)
+    {
+        x_Movement = context.ReadValue<Vector2>().x;
+        y_Movement = context.ReadValue<Vector2>().y;
     }
 }
